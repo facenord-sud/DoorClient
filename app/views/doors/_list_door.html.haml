@@ -1,0 +1,7 @@
+.panel
+  %h3 Choose a Door to Control
+  -if @doors.empty?
+    %p No door to control. Register the first one!
+  -else
+    %ul.no-bullet
+      =render @doors

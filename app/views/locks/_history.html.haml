@@ -1,0 +1,14 @@
+.panel
+  -if @show_door.nil? or @show_door.locks.empty?
+    %blockquote No lock history.
+  -else
+    %h3 Lock history
+    %ul
+      -@show_door.locks.each do |a_lock|
+        %li
+          = a_lock.created_at.pretty
+          the door, was
+          -if a_lock.state == 'open'
+            unlock
+          -else
+            lock

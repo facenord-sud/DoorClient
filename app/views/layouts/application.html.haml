@@ -1,0 +1,15 @@
+!!! 5
+%html
+  %head
+    %title Door Client
+    =stylesheet_link_tag 'application', media: :all
+    =javascript_include_tag 'application'
+  %body
+    = hidden_field_tag :authenticity_token, form_authenticity_token
+    .row
+      .columns.small-12
+        #flash
+          =render 'layouts/flash'
+    .row
+      .columns.small-12
+        =yield

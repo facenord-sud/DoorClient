@@ -1,0 +1,14 @@
+.panel
+  -if @show_door.nil? or @show_door.opens.empty?
+    %blockquote No open history.
+  -else
+    %h3 Open history
+    %ul
+      -@show_door.opens.each do |an_open|
+        %li
+          = an_open.created_at.pretty
+          the door was
+          =an_open.state
+          at
+          =an_open.position
+          \%

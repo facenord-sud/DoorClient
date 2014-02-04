@@ -1,0 +1,11 @@
+%li
+  .row
+    .columns.small-6.overflow-auto
+      -select = ' secondary'
+      -if !@show_door.nil? and door.id == @show_door.id
+        -select = ''
+      = link_to(door.uri, door, remote: true, class: 'button small show-door'+select)
+    .columns.small-3
+      = link_to 'url', '#', use_url: strip_uri(door.uri)
+    .columns.small-3
+      = link_to 'delete', door, method: :delete, confirm: 'Are you sure ?', remote: true, class: 'button alert small'

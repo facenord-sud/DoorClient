@@ -1,0 +1,2 @@
+=simple_form_for @lock_form, url: put_door_locks_path(@show_door), method: :put, remote: true, id: 'lock-form' do |f|
+  =f.input :state, collection: {Unlock: :open, Lock: :closed}

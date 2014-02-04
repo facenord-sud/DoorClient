@@ -1,0 +1,23 @@
+
+@import "foundation/functions";
+@import 'foundation';
+
+.overflow-auto {
+  overflow-x: scroll;
+}
+
+#door-control .panel, #form{
+  min-height: emCalc(225px);
+}
+
+#list_doors .panel{
+  min-height: emCalc(515px);
+  max-height: emCalc(515px);
+  overflow-y: auto;
+}
+
+#open-history .panel, #lock_history .panel {
+  min-height: emCalc(579px);
+  max-height: emCalc(579px);
+  overflow-y: auto;
+}

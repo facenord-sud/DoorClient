@@ -1,0 +1,12 @@
+.panel
+
+  -if @open_form.nil? or @lock_form.nil?
+    %blockquote Select a door or register one to control it
+  -else
+    %h3 Control the selected door
+    %fieldset
+      %legend Open
+      =render 'opens/form'
+    %fieldset
+      %legend Lock
+      =render 'locks/form'

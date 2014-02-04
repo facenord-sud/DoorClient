@@ -1,0 +1,25 @@
+.row
+  .columns.large-6
+    .row
+      .columns.small-12
+        #door-control
+          =render 'door_control'
+      .columns.small-12
+        #form-door
+          =render 'form_door'
+  .columns.large-6
+    .row
+      .columns.small-12
+        #form
+          =render 'form'
+    .row
+      .columns.small-12
+        #list_doors
+          =render 'list_door'
+.row
+  .columns.large-6
+    #open-history
+      =render 'opens/history'
+  .columns.large-6
+    #lock-history
+      =render 'locks/history'

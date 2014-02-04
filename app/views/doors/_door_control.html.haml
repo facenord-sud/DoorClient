@@ -1,0 +1,11 @@
+.panel
+  -if @show_door.nil?
+    %blockquote Select a door or register one to view information about it
+  -else
+    %h3 Selected door's information
+    %h5
+      The door is:
+      =render 'opens/index'
+    %h5
+      and
+      =render 'locks/index'

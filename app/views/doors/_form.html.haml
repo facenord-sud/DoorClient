@@ -1,0 +1,10 @@
+.panel
+  %h3 Register a Door
+  =simple_form_for @door, remote: true do |f|
+    .row.collapse
+      .columns.large-3
+        =label 'protocol', 'protocol'
+        =select 'protocol', 'type', {:'http://' => 'http://', :'https://' => 'https://'}
+      .columns.large-9
+        =f.input :uri
+      =f.submit class: 'button success', value: 'Register'
