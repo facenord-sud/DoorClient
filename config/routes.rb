@@ -2,6 +2,7 @@ DoorClient::Application.routes.draw do
 
   concern :put do
     put on: :collection, action: :update, as: :put
+    post on: :collection, action: :pub, as: :pub
   end
 
   root to: 'doors#index'

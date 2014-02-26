@@ -21,6 +21,12 @@ class OpensController < ApplicationController
     end
   end
 
+  def pub
+
+    open = Open.new(position: params['position'], state: params['state'].downcase.to_sym)
+    logger.error('error while saving open state'+params.to_s) unless open.save
+  end
+
     private
     # Never trust parameters from the scary internet, only allow the white list through.
     def open_params

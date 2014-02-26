@@ -22,6 +22,11 @@ class LocksController < ApplicationController
     end
   end
 
+  def pub
+    lock = Lock.new(state: params['state'].downcase.to_sym)
+    logger.error('unable to save lock state: '+params.to_s) unless lock.save
+  end
+
   private
 
     # Never trust parameters from the scary internet, only allow the white list through.
