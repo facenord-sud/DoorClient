@@ -13,6 +13,18 @@ module Concerns::DoorMethods  extend  ActiveSupport::Concern
       false
     end
 
+    def register_for_notifications(url, app_uri)
+      url = url + '/pub'
+      begin
+        response = RestClient.put url, {uri: app_uri}.to_json, accept: 'application/json', content_type: 'application/json'
+      rescue RestClient::Exception => e
+        Rails.logger.debug "Error #{e.response.code} while contacting the host. The url is: '#{url}'"
+      rescue Errno::ECONNREFUSED => e
+        Rails.logger.debug "Connection refused. The url is: '#{url}'"
+      end
+      response.status == 200
+    end
+
     private
 
     def parse_params(str)

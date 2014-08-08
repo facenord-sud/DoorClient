@@ -27,6 +27,10 @@ class LocksController < ApplicationController
     logger.error('unable to save lock state: '+params.to_s) unless lock.save
   end
 
+  def notify
+    logger.info params.inspect
+  end
+
   private
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -6,6 +6,20 @@ class Door < ActiveRecord::Base
 
   validates_with DoorValidator
 
+  def register_for_notifications(url, app_uri)
+    url = url + '/pub/'+app_uri
+    begin
+      response = RestClient.put url, {uri: app_uri}.to_json, accept: 'application/json', content_type: 'application/json'
+    rescue RestClient::Exception => e
+      Rails.logger.debug "Error #{e.response.code} while contacting the host. The url is: '#{url}'"
+        return
+    rescue Errno::ECONNREFUSED => e
+      Rails.logger.debug "Connection refused. The url is: '#{url}'"
+      return
+    end
+    response.is_a? Hash
+  end
+
   def self.fetch(uri)
     if uri.blank? || uri == 'http://' || uri == 'https://'
       logger.debug(uri)

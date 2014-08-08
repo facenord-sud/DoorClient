@@ -27,6 +27,10 @@ class OpensController < ApplicationController
     logger.error('error while saving open state'+params.to_s) unless open.save
   end
 
+  def notify
+    logger.info params.inspect
+  end
+
     private
     # Never trust parameters from the scary internet, only allow the white list through.
     def open_params
