@@ -29,14 +29,16 @@ Tout d’abord, rappelons qu’une des conventions de Rails veut que toute la «
 Retenons uniquement qu’un modèle Door peut être relié entre zéro et un nombre infini de fois au modèle Lock et Open. Ainsi, tous les états d’un rideau de fer sont sauvegardés, de même que quand notre application client reçoit une notification du rideau de fer, l’état du composant d’ouverture/fermeture ou du composant de verrouillage/déverrouillage est sauvegardé.
 
 Le code ci-dessous montre comment la méthode `fetch` du modèle `Open` a été implémentée.
-￼``
-def self.fetch(uri)
-params = get_params(uri)
-  open = Open.new(params.remove(:uri).params)
-  open.state = params.get(:state)
-  open
-end
-``
+￼
+```
+  def self.fetch(uri)
+    params = get_params(uri)
+    open = Open.new(params.remove(:uri).params)
+    open.state = params.get(:state)
+    open
+  end
+```
+
 
 Pour interroger le serveur, nous avons défini une méthode fetch dans chacun des trois modèles. Cette méthode est responsable d’effectuer la requête vers le serveur, grâce à la librairie Ruby [RestClient](https://github.com/rest-client/rest-client), de parser le JSON obtenu et finalement de retourner une instance du modèle contenant les valeurs obtenues du serveur. Comme le code pour effectuer une requête vers le serveur et parser le JSON est toujours le même, nous avons défini la méthode `get_params` dans le module `ClassParams`, lui-même compris dans le module `Concerns::DoorMethods` étendu de `ActiveSupport::Concern`. Grâce aux spécificités de Ruby, chaque classe incluant ce module dispose de la méthode `get_params`. De même que pour simplifier l’interaction avec le `Hash` obtenu à partir du JSON, nous avons défini la classe `DoorParams`.
 
