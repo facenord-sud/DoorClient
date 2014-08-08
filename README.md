@@ -51,9 +51,17 @@ A chaque fois qu’une porte est enregistrée, l’état du rideau de fer corres
 Afin d’obtenir un visuel agréable à peu de frais, nous avons utilisé le framework HTML /CSS/Javascript [Foundation](http://foundation.zurb.com). Ce framework, un peu moins connu que bootstrap, permet d’obtenir des interfaces visuelles propres en assemblant des composants proposés par le framework. Nous avons effectué ce choix pour quatre raisons:
 
 
-1. Framework bien maîtrisé ne demandant pas de temps d’apprentissage. 
+1. Framework bien maîtrisé ne demandant pas de temps d’apprentissage.
 2. Grand choix de composants et très bien documenté.
 3. Adaptatif à différentes tailles d’écrans (du smartphone à l’écran de télévision).
 4. Très facilement modifiable grâce au langage Sass
 
 Pour obtenir la liste de tous les URIs, la commande `rake routes` peut être exécutées dans le répertoire de base de cette application.
+
+## Utilisation
+
+Pour utiliser l'application, lancer la commande `rails server` depuis le répertoire de l'application. Si l'application est lancée pour la première fois, exécuter tout d'abord la commande `rake db:migrate`.
+
+Par défaut l'application est lancée avec le serveur Webricks. En production il pourrait être plus judicieux d'utiliser un serveur plus robuste et plus sécurisé. Une possibilité pourrait être [thin](http://code.macournoyer.com/thin/) ou [passenger](https://www.phusionpassenger.com)
+
+La base de données est en SQLite et nécessite pas de configuration supplémentaire.
