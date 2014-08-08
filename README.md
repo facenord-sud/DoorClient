@@ -50,7 +50,8 @@ A chaque fois qu’une porte est enregistrée, l’état du rideau de fer corres
 
 Afin d’obtenir un visuel agréable à peu de frais, nous avons utilisé le framework HTML /CSS/Javascript [Foundation](http://foundation.zurb.com). Ce framework, un peu moins connu que bootstrap, permet d’obtenir des interfaces visuelles propres en assemblant des composants proposés par le framework. Nous avons effectué ce choix pour quatre raisons:
 
- 1. Framework bien maîtrisé ne demandant pas de temps d’apprentissage.
+
+1. Framework bien maîtrisé ne demandant pas de temps d’apprentissage. 
 2. Grand choix de composants et très bien documenté.
 3. Adaptatif à différentes tailles d’écrans (du smartphone à l’écran de télévision).
 4. Très facilement modifiable grâce au langage Sass
