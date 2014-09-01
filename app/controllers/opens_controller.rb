@@ -28,12 +28,18 @@ class OpensController < ApplicationController
   end
 
   def notify
-    logger.info params.inspect
+    open_hash = Hash.from_xml(request.body.read)['open']
+    door = Door.find params[:door_id]
+    open = Open.new(state: open_hash['state'].downcase.to_sym, position: open_hash['position'].to_i)
+    open.save
+    door.opens << open
+    door.save
+    render status: 200, text: 'ok'
   end
 
-    private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def open_params
-      params.require(:open).permit(:position, :state)
-    end
+  private
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def open_params
+    params.require(:open).permit(:position, :state)
+  end
 end

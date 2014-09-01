@@ -28,9 +28,10 @@ class DoorsController < ApplicationController
       @lock = nil
       @open_form = nil
       @lock_form = nil
+    else
+      @show_door.register_for_notifications(@show_door.lock_uri, notify_door_locks_url(door_id: @show_door))
+      @show_door.register_for_notifications(@show_door.open_uri, notify_door_opens_url(door_id: @show_door))
     end
-     @show_door.register_for_notifications(@show_door.lock_uri, notify_door_locks_url(door_id: @show_door))
-     @show_door.register_for_notifications(@show_door.open_uri, notify_door_opens_url(door_id: @show_door))
       respond_to do |format|
       format.html do
         @door = Door.new
@@ -46,8 +47,8 @@ class DoorsController < ApplicationController
     @doors = Door.all
     if a_door.save
       @door = Door.new
-      register_for_notifications(a_door.lock_uri, notify_door_locks)
-      register_for_notifications(a_door.open_uri, notify_door_opens)
+      a_door.register_for_notifications(a_door.lock_uri, notify_door_locks_url(door_id: a_door))
+      a_door.register_for_notifications(a_door.open_uri, notify_door_opens_url(door_id: a_door))
     else
       @door = a_door
     end
@@ -58,6 +59,8 @@ class DoorsController < ApplicationController
 
   def destroy
     door = Door.find params[:id]
+    door.un_register_for_notifications(door.lock_uri, notify_door_locks_url(door_id: door))
+    door.un_register_for_notifications(door.open_uri, notify_door_opens_url(door_id: door))
     door.destroy
     @doors = Door.all
     respond_to do |format|

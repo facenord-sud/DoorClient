@@ -28,7 +28,13 @@ class LocksController < ApplicationController
   end
 
   def notify
-    logger.info params.inspect
+    lock_hash = Hash.from_xml(request.body.read)['lock']
+    door = Door.find params[:door_id]
+    lock = Lock.new(state: lock_hash['state'].downcase.to_sym)
+    lock.save
+    door.locks << lock
+    door.save
+    render status: 200, text: 'ok'
   end
 
   private

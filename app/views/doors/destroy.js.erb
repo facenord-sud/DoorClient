@@ -1,6 +1,7 @@
+$('#list_doors').html("<ul class=\"no-bullet\"><%= escape_javascript(render('list_door')) %></ul>");
 $('#door-control').html("<%= escape_javascript(render('door_control'))%>")
 $('#form-door').html("<%= escape_javascript(render('form_door'))%>")
 $('#open-history').html("<%= escape_javascript(render('opens/history'))%>")
 $('#lock-history').html("<%= escape_javascript(render('locks/history'))%>")
 $('#flash').html("<%= escape_javascript(render('layouts/flash'))%>")
-history.pushState(null, "Door manager", "<%= door_path(@show_door)%>")
+history.pushState(null, "Door manager", "<%= root_url%>")

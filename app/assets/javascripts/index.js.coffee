@@ -1,16 +1,13 @@
 $ ->
-  $("a[use_url]").click ->
-    $('#door_uri').val($(this).attr('use_url'))
-  $('.show-door').click ->
-    history.pushState('', null, this.href)
-$ ->
-  $('#lock_state').change ->
+  $(document).on('change', '#lock_state', ->
     val = $('#lock_state').val()
     return if val == ''
     $('#new_lock').submit()
+  )
 $ ->
-  $('#open_state').change ->
+  $(document).on('change', '#open_state', ->
     val = $('#open_state').val()
     return if val == ''
     $('#new_open').submit()
+  )
 

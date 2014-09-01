@@ -7,12 +7,24 @@ class Door < ActiveRecord::Base
   validates_with DoorValidator
 
   def register_for_notifications(url, app_uri)
-    url = url + '/pub/'+app_uri
     begin
-      response = RestClient.put url, {uri: app_uri}.to_json, accept: 'application/json', content_type: 'application/json'
+      response = RestClient.put to_url_for_publisher(url, app_uri), {uri: app_uri}.to_json, accept: 'application/json', content_type: 'application/json'
     rescue RestClient::Exception => e
       Rails.logger.debug "Error #{e.response.code} while contacting the host. The url is: '#{url}'"
         return
+    rescue Errno::ECONNREFUSED => e
+      Rails.logger.debug "Connection refused. The url is: '#{url}'"
+      return
+    end
+    response.is_a? Hash
+  end
+
+  def un_register_for_notifications(url, app_uri)
+    begin
+      response = RestClient.delete to_url_for_publisher(url, app_uri), accept: 'application/json'
+    rescue RestClient::Exception => e
+      Rails.logger.debug "Error #{e.response.code} while contacting the host. The url is: '#{url}'"
+      return
     rescue Errno::ECONNREFUSED => e
       Rails.logger.debug "Connection refused. The url is: '#{url}'"
       return
@@ -38,6 +50,11 @@ class Door < ActiveRecord::Base
     end
     door.uri = uri
     door
+  end
+
+  private
+  def to_url_for_publisher(url, app_uri)
+    url + '/pub/' + app_uri
   end
 end
 
