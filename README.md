@@ -24,7 +24,7 @@ Pour cette partie, nous n’allons pas discuter de l’implémentation en détai
 
 Tout d’abord, rappelons qu’une des conventions de Rails veut que toute la « Buisness Logic » se trouve dans les modèles. De plus, nous voulons que les informations transmises par le serveur du rideau de fer soient enregistrées, dans une base de donnée SQLite dans notre application client. Nous avons donc défini trois modèles en utilisant ActiveRecord, c’est-à-dire, les modèles `Door`, `Lock` et `Open`. L’image ci-dessous montre les champs de chaque modèle et leurs relations.
 
-![](clientDiag.jpg)
+![](https://raw.githubusercontent.com/facenord-sud/DoorClient/master/clientDiag.jpg)
 
 Retenons uniquement qu’un modèle Door peut être relié entre zéro et un nombre infini de fois au modèle Lock et Open. Ainsi, tous les états d’un rideau de fer sont sauvegardés, de même que quand notre application client reçoit une notification du rideau de fer, l’état du composant d’ouverture/fermeture ou du composant de verrouillage/déverrouillage est sauvegardé.
 
